@@ -47,9 +47,10 @@ app.get("/test", async (req, res) => {
         });
 });
 
+// IOS -> Express -> Spring
 app.post("/test", async (req, res) => {
-    console.log(req.hostname);
     console.log(req.rawHeaders[7]);
+
     const f = req.files.uploadFile;
 
     const fileUrl = `http://localhost:3000/${f.name}`;
@@ -72,6 +73,7 @@ app.post("/test", async (req, res) => {
     return res.redirect(url.format(newUrl));
 });
 
+// 사진 업로드
 app.post("/upload", async (req, res) => {
     try {
         if (!req.files) {
@@ -97,6 +99,7 @@ app.post("/upload", async (req, res) => {
         res.status(500).send(err);
     }
 });
+
 app.listen(port, () => {
     console.log(`Hello world  http://localhost:${port}`);
 });
