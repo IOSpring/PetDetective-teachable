@@ -2,10 +2,10 @@ import SashiDoTeachableMachine from "@sashido/teachablemachine-node";
 import url from "url";
 
 const model = new SashiDoTeachableMachine({
-    // modelUrl: "https://teachablemachine.withgoogle.com/models/r6BBk-hiN/",
-    // modelUrl: "https://teachablemachine.withgoogle.com/models/r6BBk-hiN/",
     modelUrl: "https://teachablemachine.withgoogle.com/models/i5_fILmWs/",
 });
+
+const LOCAL_ADDRESS = "localhost:3000";
 
 export const predictImage = async (req, res) => {
     console.log(req.rawHeaders[7]);
@@ -32,9 +32,12 @@ export const predictImage = async (req, res) => {
     }
     query = query.replace(/(\s*)/g, "");
 
-    const newUrl = url.parse(
-        `http://localhost:8080/teachable?pre1=${predictions[0].prediction}&score1=${predictions[0].score}&pre2=${predictions[1].prediction}&score2=${predictions[1].score}`
-    );
+    let newUrl;
+    if (req.rawHeaders[7] === LOCAL_ADDRESS) {
+        newUrl = url.parse(
+            `http://localhost:8080/teachable?pre1=${predictions[0].prediction}&score1=${predictions[0].score}&pre2=${predictions[1].prediction}&score2=${predictions[1].score}`
+        );
+    }
 
     return res.redirect(url.format(newUrl));
 };

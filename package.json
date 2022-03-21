@@ -5,11 +5,14 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "nodemon --exec babel-node src/app.js"
+        "start2": "nodemon --exec babel-node src/app.js",
+        "start": "node build/app.js",
+        "build": "babel src -d build"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "@babel/cli": "^7.17.6",
         "@babel/core": "^7.17.8",
         "@babel/node": "^7.16.8",
         "@babel/preset-env": "^7.16.11",
@@ -22,6 +25,7 @@
         "lodash": "^4.17.21",
         "morgan": "^1.10.0",
         "nodemon": "^2.0.15",
+        "regenerator-runtime": "^0.13.9",
         "request": "^2.88.2"
     }
 }
