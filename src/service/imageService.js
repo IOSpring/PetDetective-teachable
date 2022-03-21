@@ -2,7 +2,7 @@ import SashiDoTeachableMachine from "@sashido/teachablemachine-node";
 import url from "url";
 import request from "request";
 const model = new SashiDoTeachableMachine({
-    modelUrl: "https://teachablemachine.withgoogle.com/models/i5_fILmWs/",
+    modelUrl: "https://teachablemachine.withgoogle.com/models/ZbF8MC8-m/",
 });
 
 const LOCAL_ADDRESS = "localhost:3000";
