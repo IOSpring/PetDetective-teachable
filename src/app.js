@@ -11,7 +11,7 @@ import url from "url";
 import {predictImage} from "./service/imageService";
 //teachablemachine-node
 const app = express();
-
+//
 const port = 3000;
 
 const model = new SashiDoTeachableMachine({
