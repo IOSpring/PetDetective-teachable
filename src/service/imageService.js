@@ -37,6 +37,8 @@ export const predictImage = async (req, res) => {
         newUrl = url.parse(
             `http://localhost:8080/teachable?pre1=${predictions[0].prediction}&score1=${predictions[0].score}&pre2=${predictions[1].prediction}&score2=${predictions[1].score}`
         );
+    } else {
+        newUrl = `https://iospring.herokuapp.com/teachable?pre1=${predictions[0].prediction}&score1=${predictions[0].score}&pre2=${predictions[1].prediction}&score2=${predictions[1].score}`;
     }
 
     return res.redirect(url.format(newUrl));
