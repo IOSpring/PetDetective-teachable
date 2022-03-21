@@ -5,16 +5,16 @@ import fileUpload from "express-fileupload";
 import cors from "cors";
 import morgan from "morgan";
 import _ from "lodash";
-import TeachableMachine from "@sashido/teachablemachine-node";
+import SashiDoTeachableMachine from "@sashido/teachablemachine-node";
 import request from "request";
 import url from "url";
 import {predictImage} from "./service/imageService";
-
+//teachablemachine-node
 const app = express();
 
 const port = 3000;
 
-const model = new TeachableMachine({
+const model = new SashiDoTeachableMachine({
     modelUrl: "https://teachablemachine.withgoogle.com/models/i5_fILmWs/",
 });
 

@@ -1,0 +1,55 @@
+diff --git a/node_modules/@sashido/teachablemachine-node/index.js b/node_modules/@sashido/teachablemachine-node/index.js
+index 0dd9fe4..999cf48 100644
+--- a/node_modules/@sashido/teachablemachine-node/index.js
++++ b/node_modules/@sashido/teachablemachine-node/index.js
+@@ -5,6 +5,7 @@ const tf = require('@tensorflow/tfjs');
+ const PImage = require('pureimage');
+ const isImageUrl = require('is-image-url');
+ const parseDataUrl = require('parse-data-url');
++const { log } = require("console");
+ 
+ const wait = ms => new Promise(r => setTimeout(r, ms));
+ 
+@@ -137,25 +138,13 @@ class SashiDoTeachableMachine {
+     return retryOperation(() => this.checkModel(() => this.inference(params)), 1000, 20); // method, delay, retries
+   }
+ 
+-  async inference({ imageUrl }) {
++  async inference({ data }) {
++    // fixed
+     try {  
+-      let data;
+-      let buffer;
+-      let contentType;
+-
+-      if (imageUrl.startsWith('data:image/')) {
+-        data = parseDataUrl(imageUrl);
+-        
+-        contentType = data.contentType;
+-        buffer = data.toBuffer();
+-      } else {
+-        data = await fetch(imageUrl);
+-
+-        contentType = data.headers.get("Content-Type");
+-        buffer = await data.buffer();
+-      }
+-      
++      const contentType = data.mimetype;
++      const buffer = data.data;
+       const stream = bufferToStream(buffer);
++
+       let imageBitmap;
+ 
+       if ((/png/).test(contentType)) {
+@@ -167,8 +156,11 @@ class SashiDoTeachableMachine {
+       }
+ 
+       const predictions = await predict(imageBitmap, this.model);
++    
+       return predictions;
++    
+     } catch (error) {
++      
+       return Promise.reject({ error });
+     }
+   }
