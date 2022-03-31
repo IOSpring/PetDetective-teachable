@@ -40,7 +40,7 @@ export const predictImage = async (req, res) => {
 
     const result = await request.post({
         uri:
-            IsRemove === IsRemove
+            IsRemove === LOCAL_ADDRESS
                 ? "http://localhost:8080/teachable"
                 : "https://iospring.herokuapp.com/teachable",
         body: {
@@ -52,7 +52,7 @@ export const predictImage = async (req, res) => {
     let newUrl;
     if (IsRemove === LOCAL_ADDRESS) {
         newUrl = url.parse(
-            `http://localhost:8080teachable?pre1=${predictions[0].prediction}&score1=${predictions[0].score}&pre2=${predictions[1].prediction}&score2=${predictions[1].score}`
+            `http://localhost:8080/teachable?pre1=${predictions[0].prediction}&score1=${predictions[0].score}&pre2=${predictions[1].prediction}&score2=${predictions[1].score}`
         );
     } else {
         newUrl = `https://iospring.herokuapp.com/teachable?pre1=${predictions[0].prediction}&score1=${predictions[0].score}&pre2=${predictions[1].prediction}&score2=${predictions[1].score}`;
