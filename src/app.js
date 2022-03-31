@@ -54,6 +54,10 @@ app.get("/test", async (req, res) => {
 // IOS -> Express -> Spring -> IOS
 
 app.post("/breed", predictImage);
+app.get("/breed", (req, res, next) => {
+    console.log(req.body);
+    return res.json(JSON.stringify(req.body.predictions));
+});
 
 app.post("/upload", uploadFileInLocal);
 
