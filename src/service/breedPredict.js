@@ -1,7 +1,7 @@
 import SashiDoTeachableMachine from "@sashido/teachablemachine-node";
 
 const model = new SashiDoTeachableMachine({
-    modelUrl: "https://teachablemachine.withgoogle.com/models/VIbHHKJX_/",
+    modelUrl: "https://teachablemachine.withgoogle.com/models/YNWOxpJUf/",
 });
 
 export const predictImage = async (req, res) => {
